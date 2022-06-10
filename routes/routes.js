@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const fs = require('fs');
+const crypto = require('crypto');
 const talkerExists = require('../middlewares/talkerExistsMiddleware');
 
 const routes = Router();
@@ -20,4 +21,7 @@ routes.get('/talker/:id', talkerExists, (request, response) => {
   response.status(200).json(requestedTalker);
 });
 
+routes.post('/login', (_request, response) => {
+  response.status(200).json({ token: crypto.randomBytes(8).toString('hex') });
+});
 module.exports = routes;
