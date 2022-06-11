@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-function talkerExists(request, response, next) {
-  const { id } = request.params;
+function talkerExists(req, res, next) {
+  const { id } = req.params;
   const talkers = JSON.parse(
     fs.readFileSync(`${__dirname}/../talker.json`, { encoding: 'utf8' }),
   );
@@ -11,7 +11,7 @@ function talkerExists(request, response, next) {
     }
     next();
   } catch (error) {
-    response.status(404).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 }
 
